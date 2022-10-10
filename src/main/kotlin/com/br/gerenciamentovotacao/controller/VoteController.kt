@@ -19,7 +19,7 @@ class VoteController(private val voteService: VoteService) {
 
     @PostMapping
     fun createVote(@RequestBody voteRequest: VoteRequest): Mono<ResponseEntity<VoteResponse>> {
-        return voteService.doVote(voteRequest.toDocument())
+        return voteService.doVote(voteRequest.toDocument(), voteRequest.associatedCpf)
             .map{ ResponseEntity.created(URI.create("")).body(it.toResponse())}
     }
 

@@ -8,5 +8,8 @@ import java.util.UUID
 data class AgendaDocument(
     val id: UUID,
     val name: String,
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime,
+    val active: Boolean,
+    val startVotingAt: LocalDateTime?,
+    val votingTimeInSeconds: Long?
 )

@@ -30,7 +30,7 @@ class AgendaController(private val agendaService: AgendaService) {
     @PatchMapping("/init-voting")
     fun initVoting(@RequestBody votingRequest: VotingRequest) : Mono<ResponseEntity<VotingResponse>> {
         return agendaService.initVoting(votingRequest).map {
-            ResponseEntity.created(URI.create("")).body(it.toVotingResponse()) }
+            ResponseEntity.ok(it.toVotingResponse()) }
         }
 
 }

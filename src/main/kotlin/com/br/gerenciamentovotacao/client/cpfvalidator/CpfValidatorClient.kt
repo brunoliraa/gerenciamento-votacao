@@ -1,6 +1,7 @@
 package com.br.gerenciamentovotacao.client.cpfvalidator
 
 import com.br.gerenciamentovotacao.client.cpfvalidator.exchange.CpfValidatorResponse
+import com.br.gerenciamentovotacao.client.cpfvalidator.exchange.VoteStatus
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Value
@@ -32,6 +33,8 @@ class CpfValidatorClient(
             .map { it.t2 }
             .flatMap {
                 it.bodyToMono(CpfValidatorResponse::class.java)
+            }.filter{
+                it.status.equals(VoteStatus.ABLE_TO_VOTE)
             }
     }
 

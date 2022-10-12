@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.util.UUID
+import reactor.kotlin.core.publisher.switchIfEmpty
 
 @Service
 class VoteService(
@@ -22,7 +23,7 @@ class VoteService(
 
     fun doVote(voteDocument: VoteDocument, associatedCpf: String): Mono<VoteDocument> {
         return cpfValidatorClient.validate(associatedCpf)
-            .doOnSubscribe { }
+            .switchIfEmpty{ throw IllegalArgumentException("Associated with cpf=${associatedCpf} is unable to vote")}
             .doOnSuccess { logger.info("m=doVote call to cpf validator completed cpf=${associatedCpf} status=${it.status}") }
             .onErrorResume {
                 logger.error("failed to call cpf validator")

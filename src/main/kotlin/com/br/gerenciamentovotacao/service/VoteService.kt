@@ -30,6 +30,7 @@ class VoteService(
                 Mono.error(it)
             }
             .flatMap { agendaService.find(voteDocument.agendaId) }
+            .filter { it.active }
             .flatMap { voteRepository.insert(voteDocument) }
             .doOnSuccess { logger.info("m=doVote vote with success id=${it.id}") }
             .doOnError { logger.info("m=doVote failed messageException=${it.localizedMessage}") }

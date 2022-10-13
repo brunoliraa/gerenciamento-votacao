@@ -2,7 +2,7 @@ package com.br.gerenciamentovotacao.service
 
 import com.br.gerenciamentovotacao.client.cpfvalidator.CpfValidatorClient
 import com.br.gerenciamentovotacao.model.VoteDocument
-import com.br.gerenciamentovotacao.model.enums.VOTE_TYPE
+import com.br.gerenciamentovotacao.model.enums.VoteType
 import com.br.gerenciamentovotacao.repository.VoteRepository
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -35,7 +35,7 @@ class VoteService(
             .doOnError { logger.info("m=doVote failed messageException=${it.localizedMessage}") }
     }
 
-    fun getVotesByAgenda(agendaId: UUID): Flux<MutableMap<VOTE_TYPE, MutableCollection<VoteDocument>>> {
+    fun getVotesByAgenda(agendaId: UUID): Flux<MutableMap<VoteType, MutableCollection<VoteDocument>>> {
         return voteRepository.findAllByAgendaId(agendaId)
             .groupBy { it.voteType }
             .flatMap { idFlux ->

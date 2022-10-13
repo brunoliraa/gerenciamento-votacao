@@ -1,5 +1,5 @@
 package com.br.gerenciamentovotacao.model.enums
 
-enum class VOTE_TYPE {
+enum class VoteType {
     YES, NO
 }

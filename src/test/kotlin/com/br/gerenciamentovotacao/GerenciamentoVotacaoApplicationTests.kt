@@ -10,7 +10,7 @@ import com.br.gerenciamentovotacao.exchange.VoteRequest
 import com.br.gerenciamentovotacao.exchange.VotingRequest
 import com.br.gerenciamentovotacao.model.AgendaDocument
 import com.br.gerenciamentovotacao.model.VoteDocument
-import com.br.gerenciamentovotacao.model.enums.VOTE_TYPE
+import com.br.gerenciamentovotacao.model.enums.VoteType
 import com.br.gerenciamentovotacao.repository.AgendaRepository
 import com.br.gerenciamentovotacao.repository.VoteRepository
 import com.br.gerenciamentovotacao.service.AgendaService
@@ -101,11 +101,11 @@ class GerenciamentoVotacaoApplicationTests {
         val associatedId = UUID.randomUUID()
         val associatedCpf = "62289608068"
 
-        val voteRequest = VoteRequest(VOTE_TYPE.YES, agendaId, associatedId, associatedCpf)
+        val voteRequest = VoteRequest(VoteType.YES, agendaId, associatedId, associatedCpf)
 
         val cpfValidatorResponse = CpfValidatorResponse(VoteStatus.ABLE_TO_VOTE)
 
-        val voteDocument = VoteDocument(UUID.randomUUID(), LocalDateTime.now(),VOTE_TYPE.YES,agendaId,associatedId)
+        val voteDocument = VoteDocument(UUID.randomUUID(), LocalDateTime.now(),VoteType.YES,agendaId,associatedId)
 
         val agenda = AgendaDocument(agendaId, "teste", LocalDateTime.now(), true, LocalDateTime.now(), 120L)
 

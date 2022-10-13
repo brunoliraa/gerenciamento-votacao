@@ -12,7 +12,7 @@ class AgendaSchedule(val agendaRepository: AgendaRepository) {
 
     private val logger: Logger = LoggerFactory.getLogger(this.javaClass)
 
-    @Scheduled(fixedDelay = 10_000)
+    @Scheduled(fixedDelay = 60_000)
     fun closeVoting() {
         agendaRepository.findTop100ByActiveTrue()
             .toStream()
